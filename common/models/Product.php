@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "products".
@@ -16,7 +17,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class Product extends \yii\db\ActiveRecord
+class Product extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -26,7 +27,22 @@ class Product extends \yii\db\ActiveRecord
         return 'products';
     }
 
-    /**
+
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'value' => gmdate("Y-m-d H:i:s"),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+        ];
+    }
+
+        /**
      * {@inheritdoc}
      */
     public function rules()

@@ -1,10 +1,13 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Product;
+use common\models\Section;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -72,9 +75,22 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($section_id = null)
     {
-        return $this->render('index');
+        $query = Product::find();
+        if ($section_id) {
+            $query->where(['section_id'=> $section_id]);
+        }
+
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $products = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $sections = Section::find()->all();
+
+        return $this->render('index',  ['products'=> $products, 'sections' => $sections, 'pages' => $pages]);
     }
 
     /**

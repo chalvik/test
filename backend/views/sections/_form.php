@@ -17,8 +17,6 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'pid')
         ->dropDownList(ArrayHelper::map(Section::find()->where(['pid'=>0])->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'pid')->textInput() ?>
-
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
