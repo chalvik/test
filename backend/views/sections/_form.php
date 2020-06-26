@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'pid')
-        ->dropDownList(ArrayHelper::map(Section::find()->where(['pid'=>0])->all(), 'id', 'title')) ?>
+        ->dropDownList(ArrayHelper::map(Section::find()->where(['pid'=>0])->all(), 'id', 'title'), ['prompt'=>'Select parent']) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

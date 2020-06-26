@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'section_id')
-            ->dropDownList(ArrayHelper::map(Section::find()->all(), 'id', 'title')) ?>
+            ->dropDownList(ArrayHelper::map(Section::find()->all(), 'id', 'title'), ['prompt'=>'Select section']) ?>
 
     <?= $form->field($model, 'file')->fileInput() ?>
 
