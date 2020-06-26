@@ -49,6 +49,7 @@ class Section extends ActiveRecord
             [['title'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
+            [['pid'], 'default', 'value' => 0],
         ];
     }
 
