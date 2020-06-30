@@ -83,7 +83,7 @@ class SiteController extends Controller
         }
 
         $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pagesize'=>3]);
         $products = $query->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
